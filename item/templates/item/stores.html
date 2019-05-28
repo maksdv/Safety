@@ -1,0 +1,31 @@
+{% extends './index.html' %}
+{% load staticfiles %}
+
+
+
+
+{% block body %}
+<h2>ssssss</h2>
+{% if kk %}
+<h1> 1 </h1>
+{% endif %}
+<div class=" col-md-2"></div>
+
+<div class=" col-md-2"></div>
+{% for item in items %}
+<div class="contrainer-fluid" style="text-align:center;">
+  <div class="card col-xs-12 col-sm-4 col-md-3" style="margin-bottom:15px;">
+    <img src="{{ MEDIA_ROOT }}/{{ item.image }}" class="card-img-top" alt="..." width="50%">
+    <div class="card-body">
+      <h5 class="card-title"><strong>{{ item.name }}</strong></h5>
+      <p class="card-text"> {{ item.description }}</p>
+      <h5 class="card-title"><strong>Grupo:</strong> {{ item.group }}</h5>
+      <h5 class="card-title"><strong>Puntuacion:</strong> {{ item.score }}</h5>
+      <p id="kk" class="card-text"><strong>PVP:</strong> {{ item.price }}</p>
+      <a href="#" class="btn btn-warning">Go</a>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
