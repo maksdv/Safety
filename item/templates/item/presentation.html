@@ -7,27 +7,12 @@
 {{ form.non_field_errors }}
 <div class="panel-group form-horizontal contrainer-fluid" style="text-align:center;">
 
-<form class="col-md-3" style="margin:20px;height:500px;border-right:solid;" action="" method="POST">
-    {% csrf_token %}
-    <div class="form-group" style="margin-top:10px;">
-      <div class="col-md-12">
-        Edad: {{ form.edad }}
-      </div>
-      <div class="col-md-12" style="margin-top:10px;">
-        Modo: {{ form.modoo }}
-      </div>
-      <div class="col-md-12" style="margin-top:10px;">
-       No tengo IsoFix: {{ form.isofix }}
-      </div>
-    </div>
-  <button type="submit" class="btn btn-primary col-md-12" style="text-align:center;margin-top:10px;">Buscar</button>
-</form>
 <h2>Las mejores sillas de seguridad</h2>
 {% for item in items %}
 
   <div class="card col-xs-12 col-sm-4 col-md-4" style="margin-bottom:15px;text-align:center;margin-top:20px;">
     
-    <img src="{{ MEDIA_ROOT }}/{{ item.image }}" class="card-img-top" alt="..." width="50%">
+    <img src="{{ MEDIA_ROOT }}/{{ item.image }}" class="card-img-top" alt="..." width="50%" height="250px">
     <div class="card-body">
       <h5 class="card-title"><strong>{{ item.name }}</strong></h5>
       <p class="card-text"> {{ item.description }}</p>
