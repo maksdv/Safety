@@ -29,9 +29,13 @@ def about(request):
 def stores(request):
 
     items_cero = Item.objects.filter(group='0')
-    items_uno = Item.objects.filter(group='0-1')
+    items_unn = Item.objects.filter(group='0-1')
+    items_un = Item.objects.filter(group='1')
     items_dos_tres = Item.objects.filter(group='2')
-    cero_uno=items_cero | items_uno
+    items_dos_tres_no_isofix = items_dos_tres.filter(isofix='no')
+    items_uno = items_unn | items_un
+
+    cero_uno=items_cero | items_unn
     
     if request.method == 'POST':
         
@@ -42,44 +46,60 @@ def stores(request):
         if form.is_valid():
             kk=request.POST.get('edad')
             modo = request.POST.get('modoo')
+            isofix = request.POST.get('isofix')
             
             if int(kk) == 1:
                 if modo == 'calidad':
                     cero_uno_calidad=cero_uno.order_by('-score')
                     data = serializers.serialize("json", cero_uno_calidad)
                     request.session['data'] = data
-                    
-                    return HttpResponseRedirect('/informe', {'form': form,'items': cero_uno_calidad})
+                    return HttpResponseRedirect('/informe', {})
                 else:
-                    
                     cero_uno_precio = cero_uno.order_by('price')
                     data = serializers.serialize("json", cero_uno_precio)
-                    ''' pp=ast.literal_eval(data)
-                    
-                    for cosa in pp:
-                        fields = [cosa.get("fields") for cosa in pp] '''
                     request.session['data'] = data
-                    return HttpResponseRedirect('/informe',{'form': form,'items': cero_uno_precio})
+                    return HttpResponseRedirect('/informe',{})
             if int(kk) == 2:
                 if modo == 'precio':
                     items_uno_precio = items_uno.order_by('price')
-                    return render(request, 'item/informe.html', {'form': form,'items': items_uno_precio})
+                    if isofix == 'si':
+                        data = serializers.serialize("json", items_uno_precio)
+                        request.session['data'] = data
+                    else:
+                        items_uno_no_isofix = items_uno_precio.filter(isofix='no')
+                        data = serializers.serialize("json", items_uno_no_isofix)
+                        request.session['data'] = data
+                    return HttpResponseRedirect('/informe',{})
                 else:
                     items_uno_calidad = items_uno.order_by('-score')
-                    return render(request, 'item/informe.html', {'form': form,'items': items_uno_calidad})
+                    if isofix == 'si':
+                        data = serializers.serialize("json", items_uno_calidad)
+                        request.session['data'] = data
+                    else:
+                        items_uno_calidad_noisofix = items_uno_calidad.filter(isofix='no')
+                        data = serializers.serialize("json", items_uno_calidad_noisofix)
+                        request.session['data'] = data
+                    return HttpResponseRedirect('/informe',{})
             if int(kk) == 3:
                 if modo == 'precio':
                     items_dos_precio = items_dos_tres.order_by('price')
-                    return render(request, 'item/informe.html', {'form': form,'items': items_dos_precio})
+                    data = serializers.serialize("json", items_dos_precio)
+                    request.session['data'] = data
+                    return HttpResponseRedirect('/informe', {})
                 else:
                     items_dos_calidad = items_dos_tres.order_by('-score')
-                    return render(request, 'item/informe.html', {'form': form,'items': items_dos_calidad})
+                    data = serializers.serialize("json", items_dos_calidad)
+                    request.session['data'] = data
+                    return HttpResponseRedirect('/informe', {})
     else:
         form = NameForm()
         
     return render(request, 'item/stores.html', {'form': form})
 
 def informe(request):
+    if request.GET.get('go'):
+        return HttpResponseRedirect('/stores', {})
+
     mail = request.POST.get('text')
     kk = request.GET.get('name')
     if request.POST.get('text'):
@@ -90,13 +110,17 @@ def informe(request):
                     [mail],
                     fail_silently=False,
                 )
+                return HttpResponseRedirect('/agrad', {})
 
     text = Email()
     data = request.session.get('data')
     pp=ast.literal_eval(data)
                     
-    for cosa in pp:
-        fields = [cosa.get("fields") for cosa in pp]
-        
-    
+    for it in pp:
+        fields = [it.get("fields") for it in pp]
+
     return render(request, 'item/informe.html', {'text':text, 'data': fields})
+
+def agrad(request):
+    return render(request, 'item/agrad.html', {})
+   

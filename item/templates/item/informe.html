@@ -1,35 +1,27 @@
 {% extends './index.html' %}
 {% load staticfiles %}
 
-
-
 {{ form.errors }}
 {{ form.non_field_errors }}
 {% block body %}
-
-
-
-
+<a href="?go=back"><img src="../static/images/flecha.png" width="50px" height="50px"></img></a>
 <center><h2>SU RESULTADO</h2></center>
-
+<div class="col-md-12">
 {% for item in data %}
-
   <div class="card col-xs-12 col-sm-4 col-md-4" style="margin-bottom:15px;text-align:center;margin-top:20px;">
-    
     <img src="{{ MEDIA_ROOT }}/{{ item.image }}" class="card-img-top" alt="..." width="50%" height="200px">
     <div class="card-body">
       <h5 class="card-title"><strong>{{ item.name }}</strong></h5>
-      <p class="card-text"> {{ item.description }}</p>
       <h5 class="card-title"><strong>Grupo:</strong> {{ item.group }}</h5>
       <h5 class="card-title"><strong>Puntuacion:</strong> {{ item.score }}</h5>
-      <p id="kk" class="card-text"><strong>PVP:</strong> {{ item.price }}</p>
+      <p id="kk" class="card-text"><strong>PVP:</strong> {{ item.price }}€</p>
       <a href="#" class="btn btn-warning">Detalles</a>
     </div>
   </div>
-</div>
 {% endfor %}
-
-<form class="col-md-8" style="height:500px;text-align:center;" action="?name=holaaaaa" method="POST">
+</div>
+<div class="col-md-2"></div>
+<form class="col-md-8" style="height:500px;text-align:center;" action="?redirect=si" method="POST">
     {% csrf_token %}
     
     <div class="form-group" style="margin-top:10px;">
