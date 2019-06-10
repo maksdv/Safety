@@ -1,0 +1,29 @@
+{% extends './index.html' %}
+{% load staticfiles %}
+
+{{ form.errors }}
+{{ form.non_field_errors }}
+{% block body %}
+<h2></h2>
+<div class="col-md-3"></div>
+<form class="col-md-6" style="height:500px;text-align:center;" action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group" style="margin-top:10px;">
+      <div class="col-md-12">
+        Edad{{ form.edad }}
+      </div>
+      <div class="col-md-12" style="margin-top:10px;">
+        Categoría{{ form.modoo }}
+      </div>
+      <div class="col-md-12" style="margin-top:10px;">
+       Tienes IsoFix?{{ form.isofix }}
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+    <button type="submit" class="btn btn-primary col-md-4" style="text-align:center;margin-top:10px;">Buscar</button>
+    <div class="col-md-4"></div>
+</form>
+<div class="col-md-3"></div>
+</div>
+
+{% endblock %}
