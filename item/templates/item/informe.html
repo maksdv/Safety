@@ -15,23 +15,36 @@
       <h5 class="card-title"><strong>Grupo:</strong> {{ item.group }}</h5>
       <h5 class="card-title"><strong>Puntuacion:</strong> {{ item.score }}</h5>
       <p id="kk" class="card-text"><strong>PVP:</strong> {{ item.price }}€</p>
-      <a href="#" class="btn btn-warning">Detalles</a>
     </div>
   </div>
 {% endfor %}
 </div>
-<div class="col-md-2"></div>
-<form class="col-md-8" style="height:500px;text-align:center;" action="?redirect=si" method="POST">
+<nav class="col-xs-12 col-sm-12 col-md-12" aria-label="Page navigation example" style="text-align:center;">
+  <ul class="pagination justify-content-center">
+  {% if data.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ data.previous_page_number }}" tabindex="-1">Anterior</a>
+    </li>
+  {% endif %}   
+  {% if data.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ data.next_page_number }}">Siguiente</a>
+    </li>
+  {% endif %}
+  </ul>
+</nav>
+<div class="col-xs-2 col-md-2"></div>
+<form class="col-xs-10 col-md-8" style="text-align:center;margin:25px;" action="" method="POST">
     {% csrf_token %}
-    
+    <label><h5 style="mcolor:red;">Quires recibir esta lista en tu correo?</h5></label>
     <div class="form-group" style="margin-top:10px;">
-      <div class="col-md-12">
-        Email: {{ text.text }}
+      <div class="col-md-12" style="margin-bottom:25px;color:red;">
+        {{ text.text }}
       </div>
     </div>
-  <button type="submit" class="btn btn-primary col-md-12" style="text-align:center;margin-top:10px;">Enviar</button>
+  <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
-
+<div class="col-xs-2 col-md-2"></div>
 </div>
 
 {% endblock %}

@@ -20,15 +20,16 @@ isofixx = (
     ('no', 'No tengo IsoFix'),
 )
 
-class Email(forms.Form):
-    text = forms.EmailField()
+class EmailForm(forms.Form):
+    text = forms.CharField(widget= forms.TextInput(attrs={'placeholder':' Correo electrónico'}))
 
 class NameForm(forms.Form):
     edad = forms.ChoiceField(
-        required=True,
         widget=forms.Select(
             attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'type': 'email',
+                'id': 'exampleFormControlInput1'
             }
         ),
         choices=edadd,

@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from .models import Item
 from .models import Buscador
 from .forms import NameForm
-from .forms import Email
+from .forms import EmailForm
 from django.core import serializers
 import ast
 import numpy as np
@@ -102,22 +102,36 @@ def informe(request):
 
     mail = request.POST.get('text')
     kk = request.GET.get('name')
+    data = request.session.get('data')
+    pp=ast.literal_eval(data)
+    namess=''
+
+    for it in pp:
+        namess += it.get("fields").get("name")+", "
+
+    names = "Aquí está tu lista de selección: "+namess[:len(namess) - 2]
+
+    for it in pp:
+        fields = [it.get("fields") for it in pp]
+
+    paginator = Paginator(fields, 3)
+    page = request.GET.get('page')
+    fields = paginator.get_page(page)
+
     if request.POST.get('text'):
                 send_mail(
                     'Tu lista de sillas está aquí',
-                    kk,
+                    names,
                     'maxdv31@gmail.com',
                     [mail],
                     fail_silently=False,
                 )
                 return HttpResponseRedirect('/agrad', {})
 
-    text = Email()
-    data = request.session.get('data')
-    pp=ast.literal_eval(data)
+    text = EmailForm()
+    
                     
-    for it in pp:
-        fields = [it.get("fields") for it in pp]
+    
 
     return render(request, 'item/informe.html', {'text':text, 'data': fields})
 

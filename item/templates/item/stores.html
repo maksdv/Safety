@@ -4,9 +4,9 @@
 {{ form.errors }}
 {{ form.non_field_errors }}
 {% block body %}
-
-<div class="col-md-2"></div>
-<form class="col-md-8" style="height:500px;text-align:center;" action="" method="POST">
+<h2></h2>
+<div class="col-md-3"></div>
+<form class="col-md-6" style="height:500px;text-align:center;" action="" method="POST">
     {% csrf_token %}
     <div class="form-group" style="margin-top:10px;">
       <div class="col-md-12">
@@ -19,40 +19,11 @@
        Tienes IsoFix?{{ form.isofix }}
       </div>
     </div>
-  <button type="submit" class="btn btn-primary col-md-12" style="text-align:center;margin-top:10px;">Buscar</button>
+    <div class="col-md-4"></div>
+    <button type="submit" class="btn btn-primary col-md-4" style="text-align:center;margin-top:10px;">Buscar</button>
+    <div class="col-md-4"></div>
 </form>
-{% comment %} <h2>SU RESULTADO</h2>
-{% for item in items %}
-
-  <div class="card col-xs-12 col-sm-4 col-md-4" style="margin-bottom:15px;text-align:center;margin-top:20px;">
-    
-    <img src="{{ MEDIA_ROOT }}/{{ item.image }}" class="card-img-top" alt="..." width="50%">
-    <div class="card-body">
-      <h5 class="card-title"><strong>{{ item.name }}</strong></h5>
-      <p class="card-text"> {{ item.description }}</p>
-      <h5 class="card-title"><strong>Grupo:</strong> {{ item.group }}</h5>
-      <h5 class="card-title"><strong>Puntuacion:</strong> {{ item.score }}</h5>
-      <p id="kk" class="card-text"><strong>PVP:</strong> {{ item.price }}</p>
-      <a href="#" class="btn btn-warning">Go</a>
-    </div>
-  </div>
-</div>
-{% endfor %}
-
-<nav class="col-xs-12 col-sm-12 col-md-12" aria-label="Page navigation example" style="text-align:center;">
-  <ul class="pagination justify-content-center">
-  {% if items.has_previous %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ items.previous_page_number }}" tabindex="-1">Anterior</a>
-    </li>
-  {% endif %}   
-  {% if items.has_next %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ items.next_page_number }}">Siguiente</a>
-    </li>
-  {% endif %}
-  </ul>
-</nav> {% endcomment %}
+<div class="col-md-3"></div>
 </div>
 
 {% endblock %}
