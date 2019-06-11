@@ -21,7 +21,7 @@ isofixx = (
 )
 
 class EmailForm(forms.Form):
-    text = forms.CharField(widget= forms.TextInput(attrs={'placeholder':' Correo electrónico'}))
+    text = forms.CharField(widget = forms.TextInput(attrs={'placeholder':' Correo electrónico'}))
 
 class NameForm(forms.Form):
     edad = forms.ChoiceField(
