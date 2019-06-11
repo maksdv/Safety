@@ -29,8 +29,8 @@ ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'localhost']
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'maxdv31@gmail.com'
-EMAIL_HOST_PASSWORD = '****'
+EMAIL_HOST_USER = 'sillasdeauto@gmail.com'
+EMAIL_HOST_PASSWORD = 'qwertysillasdeauto'
 EMAIL_PORT = 587
 
 # Application definition
