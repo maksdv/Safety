@@ -8,7 +8,7 @@ from .forms import NameForm
 from .forms import EmailForm
 from django.core import serializers
 import ast
-import numpy as np
+
 from django.core.paginator import Paginator
 
 def index(request):
