@@ -109,7 +109,7 @@ def informe(request):
     for it in pp:
         namess += it.get("fields").get("name")+", "
 
-    names = "Aquí está tu lista de selección: "+namess[:len(namess) - 2]
+    names = "Aquí está tu lista de sillas que nos pediste: "+namess[:len(namess) - 2]
 
     for it in pp:
         fields = [it.get("fields") for it in pp]
@@ -120,7 +120,7 @@ def informe(request):
 
     if request.POST.get('text'):
                 send_mail(
-                    'Tu lista de sillas está aquí',
+                    'Tal y como prometimos.',
                     names,
                     'maxdv31@gmail.com',
                     [mail],
